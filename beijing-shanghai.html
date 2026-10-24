@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Гайд «Пекин + Шанхай за 12 дней»: маршрут по дням, Alipay с российской картой, бюджет, шпаргалки. 990 ₽.">
+<title>Пекин + Шанхай за 12 дней — Яна Глебова</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F6F1E8;--paper-2:#EDE6D9;--ink:#241A1C;--muted:#6F6164;
+  --wine:#761F2B;--wine-deep:#4B121A;--blue:#C4D2DE;--blue-deep:#405B72;--cream:#F4E7CF;
+  --line:rgba(118,31,43,.28);
+  --font-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --font-body:'Manrope','Segoe UI',system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper-2);background-image:repeating-linear-gradient(90deg,transparent 0 13px,rgba(64,91,114,.09) 13px 14px);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px;min-height:100%}
+.page{max-width:470px;margin:0 auto;background:var(--paper)}
+@media (min-width:720px){body{padding-block:48px 72px}.page{box-shadow:0 20px 60px rgba(75,18,26,.18)}}
+@media (max-width:719px){body{padding-left:0;padding-right:0}}
+.pad{padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+a:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:16px 4px;background:var(--wine)}
+.back{color:var(--cream);text-decoration:none;font-size:12px;letter-spacing:.06em;padding:6px 14px;border:1px solid rgba(244,231,207,.45);border-radius:999px;white-space:nowrap}
+.top .who{font-family:var(--font-display);font-style:italic;font-size:14px;color:#E7BFA8}
+
+.hero{background:var(--wine);color:var(--cream);padding-block:22px 32px;position:relative;overflow:hidden}
+.hero .kicker{display:inline-block;background:var(--blue);color:var(--blue-deep);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;transform:rotate(-2deg)}
+.hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(28px,7.5vw,36px);line-height:1.15;margin:14px 0 10px;color:#fff;text-wrap:balance}
+.hero p{margin:0 0 18px;font-size:15px;line-height:1.65;color:#F2DDC9;max-width:38ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px;padding:0;list-style:none}
+.facts li{font-size:12px;background:rgba(244,231,207,.14);border:1px solid rgba(244,231,207,.35);padding:5px 11px;border-radius:999px;color:var(--cream)}
+.buy{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;text-align:center;text-decoration:none;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:16px 22px;border-radius:12px;border:1.5px solid transparent;flex:1}
+.btn.cream{background:var(--cream);color:var(--wine-deep);border-color:var(--wine-deep);box-shadow:0 4px 0 var(--wine-deep)}
+.btn.wine{background:var(--wine);color:var(--cream);box-shadow:0 4px 0 var(--wine-deep)}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.price{font-family:var(--font-display);font-style:italic;font-size:26px;color:#fff;font-variant-numeric:tabular-nums}
+.torn{height:20px;background:var(--wine);clip-path:polygon(0 100%,0 60%,4% 20%,9% 70%,14% 30%,19% 80%,25% 25%,31% 65%,37% 15%,43% 75%,49% 35%,55% 70%,61% 20%,67% 80%,73% 30%,79% 65%,85% 15%,91% 70%,96% 25%,100% 60%,100% 100%)}
+.torn.flip{transform:scaleY(-1)}
+.torn.paper{background:var(--paper)}
+
+section{padding-block:34px 6px}
+.h2{margin:0 0 18px}
+.h2 span{display:block;font-family:var(--font-display);font-size:21px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.h2 small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+p.lead{margin:0 0 16px;color:var(--ink)}
+
+/* route: two stamps */
+.route{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stamp{background:#fff;border:1.5px solid var(--wine);padding:16px 14px;position:relative;clip-path:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px))}
+.stamp::after{content:"";position:absolute;inset:6px;border:1px dashed var(--line);pointer-events:none}
+.stamp b{display:block;font-family:var(--font-display);font-weight:500;font-size:30px;line-height:1;color:var(--wine)}
+.stamp b small{font-size:13px;font-family:var(--font-body);font-weight:500;letter-spacing:.06em;color:var(--muted);margin-left:4px}
+.stamp span{display:block;font-family:var(--font-display);font-size:17px;margin-top:6px;color:var(--wine-deep)}
+.stamp em{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+.note{margin:14px 0 0;font-size:13.5px;color:var(--muted)}
+
+/* contents list */
+.toc{list-style:none;margin:0;padding:0;counter-reset:n}
+.toc li{counter-increment:n;display:grid;grid-template-columns:38px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.toc li:last-child{border-bottom:1px solid var(--line)}
+.toc li::before{content:counter(n,decimal-leading-zero);font-family:var(--font-display);font-size:22px;line-height:1;color:var(--wine);padding-top:2px}
+.toc b{display:block;font-weight:600;font-size:15px;color:var(--ink)}
+.toc p{grid-column:2;margin:-8px 0 0;font-size:14px;color:var(--muted);line-height:1.5}
+
+/* screenshots */
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.shot{margin:0;background:#fff;border:1px solid var(--line);padding:8px 8px 10px;transform:rotate(-1deg)}
+.shot:nth-child(even){transform:rotate(1.2deg)}
+.shot .img{aspect-ratio:4/5;position:relative;background:var(--paper-2);display:grid;place-items:center;text-align:center;font-size:12px;color:var(--muted);padding:12px;overflow:hidden}
+.shot img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.shot figcaption{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}
+.shot.wide{grid-column:span 2;transform:rotate(.5deg)}
+.shot.wide .img{aspect-ratio:4/3}
+
+/* how it works */
+.how{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.how li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px}
+.how li::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--wine);margin-top:8px}
+.cheat{margin-top:18px;background:var(--blue);color:var(--blue-deep);padding:16px 18px;border-radius:14px;font-size:14px;line-height:1.55}
+.cheat b{display:block;font-family:var(--font-display);font-size:16px;margin-bottom:4px}
+
+/* faq */
+details{border-top:1px solid var(--line);padding:12px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--font-display);font-size:20px;color:var(--wine);line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:8px 0 0;font-size:14px;color:var(--muted);line-height:1.55}
+
+.final{background:var(--wine);color:var(--cream);padding-block:34px 36px;text-align:center}
+.final .price{display:block;margin-bottom:6px}
+.final p{margin:0 auto 18px;max-width:34ch;font-size:14.5px;color:#F2DDC9}
+.final .btn{width:100%}
+.foot{text-align:center;font-size:12px;color:#E9B9A2;margin:26px 0 0}
+.foot a{color:var(--cream);text-decoration:none}
+.legal{text-align:center;font-size:11px;line-height:1.5;color:#D9A892;margin:12px auto 0;max-width:40ch}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s,box-shadow .15s}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top pad">
+    <a class="back" href="./">← все гайды</a>
+    <span class="who">Яна Глебова</span>
+  </div>
+
+  <header class="hero pad">
+    <span class="kicker">Гайд · Китай</span>
+    <h1>Пекин + Шанхай за 12 дней</h1>
+    <p>Моя реальная поездка в апреле 2026 без турагентства, разобранная так, чтобы вы могли просто повторить: маршрут по дням, оплата с российской картой, такси, еда, шопинг и честный бюджет.</p>
+    <ul class="facts">
+      <li>12 дней</li><li>9 разделов</li><li>36 фото</li><li>16 скринов-инструкций</li><li>4 видео</li>
+    </ul>
+    <div class="buy">
+      <span class="price">990 ₽</span>
+      <a class="btn cream" href="https://web.tribute.tg/s/199C">Получить гайд</a>
+    </div>
+  </header>
+  <div class="torn flip paper"></div>
+
+  <section class="pad">
+    <div class="h2"><span>Маршрут</span><small>всё проверено на себе, цены на одного человека</small></div>
+    <div class="route">
+      <div class="stamp"><b>3<small>дня</small></b><span>Пекин</span><em>Цяньмэнь, Великая стена Сыматай и водный городок Губэй, Universal</em></div>
+      <div class="stamp"><b>8<small>дней</small></b><span>Шанхай</span><em>Французская концессия, Диснейленд, сад Юйюань, Луцзяцзуй, фотосессия в костюмах</em></div>
+    </div>
+    <p class="note">Плюс день перелёта домой. Между городами переезд на скоростном поезде, как купить билет, тоже внутри.</p>
+  </section>
+
+  <section class="pad">
+    <div class="h2"><span>Что внутри</span><small>9 разделов, каждый отдельным постом</small></div>
+    <ol class="toc">
+      <li><b>Подготовка</b><p>Въезд без визы, что взять с собой, отели, связь и eSIM.</p></li>
+      <li><b>Alipay с российской картой</b><p>Регистрация, пополнение из Т-Банка, транспортная карта для метро. Пошагово со скринами.</p></li>
+      <li><b>Такси и карты</b><p>DiDi внутри Alipay, Amap вместо Google-карт.</p></li>
+      <li><b>Пекин, дни 1–3</b><p>Цяньмэнь, Великая стена Сыматай + водный городок Губэй, Universal.</p></li>
+      <li><b>Шанхай, дни 4–12</b><p>Французская концессия, Диснейленд, сад Юйюань, фотосессия в костюмах, «Серебряное яйцо», Луцзяцзуй.</p></li>
+      <li><b>Еда</b><p>Что делать, если китайская кухня не зашла.</p></li>
+      <li><b>Шопинг</b><p>Как заказать на Taobao и Poizon с доставкой в отель, пошагово. Мои покупки и цены.</p></li>
+      <li><b>Реальный бюджет</b><p>Таблица всех трат. База ≈ 96 000 ₽ на человека.</p></li>
+      <li><b>Ошибки и лайфхаки</b><p>Что я сделала бы иначе и «идеальный маршрут, если бы поехала снова».</p></li>
+    </ol>
+  </section>
+
+  <section class="pad">
+    <div class="h2"><span>Как это выглядит</span><small>шпаргалки и инструкции из гайда</small></div>
+    <div class="shots">
+      <figure class="shot"><div class="img"><img src="img/china-1.jpg" alt="Шпаргалка по Пекину"></div><figcaption>Шпаргалка: Пекин</figcaption></figure>
+      <figure class="shot"><div class="img"><img src="img/china-2.jpg" alt="Шпаргалка по Шанхаю"></div><figcaption>Шпаргалка: Шанхай</figcaption></figure>
+      <figure class="shot wide"><div class="img"><img src="img/china-3.jpg" alt="Инструкция по Alipay"></div><figcaption>Одна из 16 пошаговых инструкций: транспортная карта в Alipay</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="pad">
+    <div class="h2"><span>Как получить</span></div>
+    <ul class="how">
+      <li>Гайд живёт в закрытом Telegram-канале: посты по разделам и по дням, удобно читать с телефона прямо в поездке.</li>
+      <li>Оплата через Tribute, доступ приходит автоматически сразу после оплаты.</li>
+      <li>Можно написать мне и задать вопрос перед поездкой.</li>
+    </ul>
+    <div class="cheat"><b>Шпаргалка с китайскими названиями</b>Все места и приложения на китайском. Нажимаешь на название, оно копируется, и его можно вставить в Amap или DiDi или просто показать таксисту.</div>
+  </section>
+
+  <section class="pad">
+    <div class="h2"><span>Вопросы</span></div>
+    <details><summary>Еду не на 12 дней, подойдёт?</summary><p>Да. Маршрут разбит по дням, а в последнем разделе есть «идеальный маршрут», из которого легко собрать короткую версию. Подготовка, Alipay, такси и еда нужны при любой длительности.</p></details>
+    <details><summary>Нужна ли виза и зарубежная карта?</summary><p>Россиянам виза для такой поездки не нужна, в разделе «Подготовка» описаны условия въезда. Платить можно с российской карты через Alipay, пополнение из Т-Банка разобрано по шагам со скринами.</p></details>
+    <details><summary>Сколько стоит сама поездка?</summary><p>База моей поездки ≈ 96 000 ₽ на человека, в гайде таблица всех трат по статьям: перелёты, отели, билеты, еда, транспорт, покупки.</p></details>
+    <details><summary>Что будет после оплаты?</summary><p>Tribute сразу пришлёт ссылку на закрытый канал. Всё лежит там: разделы, дни, фото, видео и шпаргалки.</p></details>
+  </section>
+  <div class="torn"></div>
+
+  <section class="final pad">
+    <span class="price">990 ₽</span>
+    <p>12 дней Китая без турагентства, со всеми ошибками, которые вам уже не нужно повторять.</p>
+    <a class="btn cream" href="https://web.tribute.tg/s/199C">Получить гайд</a>
+    <p class="foot">© Яна Глебова · <a href="https://www.instagram.com/iamyanaglebova">@iamyanaglebova</a></p>
+    <p class="legal">Instagram принадлежит компании Meta Platforms Inc., признанной экстремистской организацией и запрещённой на территории Российской Федерации.</p>
+  </section>
+</div>
+</body>
+</html>
