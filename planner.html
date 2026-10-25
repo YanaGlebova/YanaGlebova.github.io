@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Планер путешествий в Google Таблицах: маршрут по дням, бюджет, брони, фотоспоты и чек-лист. 990 ₽.">
+<title>Планер путешествий — Яна Глебова</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F6F1E8;--paper-2:#EDE6D9;--ink:#241A1C;--muted:#6F6164;
+  --wine:#761F2B;--wine-deep:#4B121A;--blue:#C4D2DE;--blue-deep:#405B72;--cream:#F4E7CF;
+  --line:rgba(118,31,43,.28);
+  --font-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --font-body:'Manrope','Segoe UI',system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper-2);background-image:repeating-linear-gradient(90deg,transparent 0 13px,rgba(64,91,114,.09) 13px 14px);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px;min-height:100%}
+.page{max-width:470px;margin:0 auto;background:var(--paper)}
+@media (min-width:720px){body{padding-block:48px 72px}.page{box-shadow:0 20px 60px rgba(75,18,26,.18)}}
+@media (max-width:719px){body{padding-left:0;padding-right:0}}
+.pad{padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+a:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:16px 4px;background:var(--wine)}
+.back{color:var(--cream);text-decoration:none;font-size:12px;letter-spacing:.06em;padding:6px 14px;border:1px solid rgba(244,231,207,.45);border-radius:999px;white-space:nowrap}
+.top .who{font-family:var(--font-display);font-style:italic;font-size:14px;color:#E7BFA8}
+
+.hero{background:var(--wine);color:var(--cream);padding-block:22px 32px;position:relative;overflow:hidden}
+.hero .kicker{display:inline-block;background:var(--blue);color:var(--blue-deep);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;transform:rotate(-2deg)}
+.hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(28px,7.5vw,36px);line-height:1.15;margin:14px 0 10px;color:#fff;text-wrap:balance}
+.hero p{margin:0 0 18px;font-size:15px;line-height:1.65;color:#F2DDC9;max-width:38ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px;padding:0;list-style:none}
+.facts li{font-size:12px;background:rgba(244,231,207,.14);border:1px solid rgba(244,231,207,.35);padding:5px 11px;border-radius:999px;color:var(--cream)}
+.buy{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;text-align:center;text-decoration:none;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:16px 22px;border-radius:12px;border:1.5px solid transparent;flex:1}
+.btn.cream{background:var(--cream);color:var(--wine-deep);border-color:var(--wine-deep);box-shadow:0 4px 0 var(--wine-deep)}
+.btn.wine{background:var(--wine);color:var(--cream);box-shadow:0 4px 0 var(--wine-deep)}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.price{font-family:var(--font-display);font-style:italic;font-size:26px;color:#fff;font-variant-numeric:tabular-nums}
+.torn{height:20px;background:var(--wine);clip-path:polygon(0 100%,0 60%,4% 20%,9% 70%,14% 30%,19% 80%,25% 25%,31% 65%,37% 15%,43% 75%,49% 35%,55% 70%,61% 20%,67% 80%,73% 30%,79% 65%,85% 15%,91% 70%,96% 25%,100% 60%,100% 100%)}
+.torn.flip{transform:scaleY(-1)}
+.torn.paper{background:var(--paper)}
+
+section{padding-block:34px 6px}
+.h2{margin:0 0 18px}
+.h2 span{display:block;font-family:var(--font-display);font-size:21px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.h2 small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+p.lead{margin:0 0 16px;color:var(--ink)}
+
+/* route: two stamps */
+.route{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stamp{background:#fff;border:1.5px solid var(--wine);padding:16px 14px;position:relative;clip-path:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px))}
+.stamp::after{content:"";position:absolute;inset:6px;border:1px dashed var(--line);pointer-events:none}
+.stamp b{display:block;font-family:var(--font-display);font-weight:500;font-size:30px;line-height:1;color:var(--wine)}
+.stamp b small{font-size:13px;font-family:var(--font-body);font-weight:500;letter-spacing:.06em;color:var(--muted);margin-left:4px}
+.stamp span{display:block;font-family:var(--font-display);font-size:17px;margin-top:6px;color:var(--wine-deep)}
+.stamp em{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+.note{margin:14px 0 0;font-size:13.5px;color:var(--muted)}
+
+/* contents list */
+.toc{list-style:none;margin:0;padding:0;counter-reset:n}
+.toc li{counter-increment:n;display:grid;grid-template-columns:38px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.toc li:last-child{border-bottom:1px solid var(--line)}
+.toc li::before{content:counter(n,decimal-leading-zero);font-family:var(--font-display);font-size:22px;line-height:1;color:var(--wine);padding-top:2px}
+.toc b{display:block;font-weight:600;font-size:15px;color:var(--ink)}
+.toc p{grid-column:2;margin:-8px 0 0;font-size:14px;color:var(--muted);line-height:1.5}
+
+/* screenshots */
+
+/* how it works */
+.how{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.how li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px}
+.how li::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--wine);margin-top:8px}
+.cheat{margin-top:18px;background:var(--blue);color:var(--blue-deep);padding:16px 18px;border-radius:14px;font-size:14px;line-height:1.55}
+.cheat b{display:block;font-family:var(--font-display);font-size:16px;margin-bottom:4px}
+
+/* faq */
+details{border-top:1px solid var(--line);padding:12px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--font-display);font-size:20px;color:var(--wine);line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:8px 0 0;font-size:14px;color:var(--muted);line-height:1.55}
+
+.final{background:var(--wine);color:var(--cream);padding-block:34px 36px;text-align:center}
+.final .price{display:block;margin-bottom:6px}
+.final p{margin:0 auto 18px;max-width:34ch;font-size:14.5px;color:#F2DDC9}
+.final .btn{width:100%}
+.foot{text-align:center;font-size:12px;color:#E9B9A2;margin:26px 0 0}
+.foot a{color:var(--cream);text-decoration:none}
+.legal{text-align:center;font-size:11px;line-height:1.5;color:#D9A892;margin:12px auto 0;max-width:40ch}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s,box-shadow .15s}}
+
+.tiles{display:grid;gap:12px}
+.tile{border-radius:14px;padding:16px 18px;color:var(--wine-deep)}
+.tile b{display:block;font-family:var(--font-display);font-weight:500;font-size:19px;line-height:1.2}
+.tile p{margin:6px 0 0;font-size:14px;line-height:1.5;color:#4A3A3D}
+.t1{background:#F3D9DC}.t2{background:#F7E0CB}.t3{background:#D8E9DD}.t4{background:#E4DDF1}.t5{background:#CFDCE8}.t6{background:#F4EBC9}
+.rows{display:grid;gap:12px}
+.row{background:#fff;border:1px solid var(--line);padding:16px 18px}
+.row .cap{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--wine);margin:0 0 10px}
+.row dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.row dt{color:var(--muted)}
+.row dd{margin:0;color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.row .st{display:inline-block;font-size:12px;border:1px solid var(--wine);color:var(--wine);padding:2px 10px;border-radius:999px}
+.bonus{margin-top:0;background:var(--blue);color:var(--blue-deep);padding:18px;border-radius:14px;font-size:14px;line-height:1.55}
+.bonus b{display:block;font-family:var(--font-display);font-size:17px;margin-bottom:6px;font-weight:500}
+.bonus ul{margin:8px 0 0;padding-left:18px}
+.chk{background:#fff;border:1px solid var(--line);padding:16px 18px}
+.chk .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
+.chk .head span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--wine)}
+.chk .head em{font-style:normal;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chk h4{margin:12px 0 4px;font-family:var(--font-display);font-weight:500;font-size:15px;color:var(--wine-deep)}
+.chk ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px}
+.chk li{display:flex;gap:10px;align-items:flex-start}
+.chk li::before{content:"";flex:none;width:15px;height:15px;border:1.5px solid var(--wine);border-radius:4px;margin-top:3px}
+.chk .more{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+
+.gift{position:relative;background:var(--wine);color:var(--cream);padding:34px 18px 20px;margin-top:14px;clip-path:polygon(0 8px,4% 0,8% 8px,12% 0,16% 8px,20% 0,24% 8px,28% 0,32% 8px,36% 0,40% 8px,44% 0,48% 8px,52% 0,56% 8px,60% 0,64% 8px,68% 0,72% 8px,76% 0,80% 8px,84% 0,88% 8px,92% 0,96% 8px,100% 0,100% calc(100% - 8px),96% 100%,92% calc(100% - 8px),88% 100%,84% calc(100% - 8px),80% 100%,76% calc(100% - 8px),72% 100%,68% calc(100% - 8px),64% 100%,60% calc(100% - 8px),56% 100%,52% calc(100% - 8px),48% 100%,44% calc(100% - 8px),40% 100%,36% calc(100% - 8px),32% 100%,28% calc(100% - 8px),24% 100%,20% calc(100% - 8px),16% 100%,12% calc(100% - 8px),8% 100%,4% calc(100% - 8px),0 100%)}
+.gift .sticker{position:absolute;top:-2px;right:16px;background:var(--cream);color:var(--wine);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:8px 12px 7px;transform:rotate(4deg);box-shadow:2px 3px 0 var(--wine-deep)}
+.gift h3{margin:0 0 6px;font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.15;max-width:78%}
+.gift>p{margin:0 0 16px;font-size:14px;line-height:1.5;opacity:.9}
+.gifts{display:grid;gap:10px}
+.ticket{display:flex;align-items:center;gap:14px;background:var(--cream);color:var(--wine-deep);padding:14px 16px;border-radius:10px;position:relative}
+.ticket::before,.ticket::after{content:"";position:absolute;left:62px;width:14px;height:14px;background:var(--wine);border-radius:50%}
+.ticket::before{top:-7px}.ticket::after{bottom:-7px}
+.ticket .n{flex:none;width:34px;font-family:var(--font-display);font-style:italic;font-size:30px;line-height:1;text-align:center}
+.ticket div{border-left:2px dashed rgba(118,31,43,.4);padding-left:16px}
+.ticket b{display:block;font-family:var(--font-display);font-weight:500;font-size:18px}
+.ticket span{font-size:13px;color:#5B4A4D}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top pad">
+    <a class="back" href="./">← все гайды</a>
+    <span class="who">Яна Глебова</span>
+  </div>
+
+  <header class="hero pad">
+    <span class="kicker">Планер · Google Таблицы</span>
+    <h1>Планер путешествий</h1>
+    <p>Шаблон, в котором я сама планирую поездки: маршрут по дням, бюджет, брони, фотоспоты и чек-лист в одном файле. Делаешь копию и заполняешь белые поля, остальное считается само.</p>
+    <ul class="facts">
+      <li>6 вкладок</li><li>27 пунктов в чек-листе</li><li>бюджет в рублях и валюте</li><li>+2 реальных планера в подарок</li>
+    </ul>
+    <div class="buy">
+      <span class="price">990 ₽</span>
+      <a class="btn cream" href="https://web.tribute.tg/s/19SW">Получить планер</a>
+    </div>
+  </header>
+  <div class="torn flip paper"></div>
+
+  <section class="pad">
+    <div class="h2"><span>Что внутри</span><small>6 вкладок, каждая для своей части поездки</small></div>
+    <div class="tiles">
+      <div class="tile t1"><b>Старт</b><p>Оглавление и короткая инструкция: как сделать копию и с чего начать.</p></div>
+      <div class="tile t2"><b>Моя поездка</b><p>Даты, места и транспорт по дням. Наверху видно, сколько дней осталось до поездки и сколько потрачено.</p></div>
+      <div class="tile t3"><b>Бюджет</b><p>План и факт по статьям. Каждую статью можно вести в рублях или в валюте, итог всегда в рублях.</p></div>
+      <div class="tile t4"><b>Фотоспоты</b><p>Места для кадров с превью картинки, лучшим временем и идеей кадра.</p></div>
+      <div class="tile t5"><b>Брони</b><p>Рейсы, отель, трансферы, страховка и номера бронирований в одном месте.</p></div>
+      <div class="tile t6"><b>Чек-лист</b><p>Галочки по разделам и полоса прогресса: сразу видно, сколько осталось собрать.</p></div>
+    </div>
+  </section>
+
+  <section class="pad">
+    <div class="h2"><span>Как начать</span></div>
+    <ul class="how">
+      <li>Файл → Создать копию. Копия станет твоей, её можно открывать с телефона в приложении Google Таблицы.</li>
+      <li>Одна поездка, один файл: для каждой новой поездки делаешь новую копию шаблона.</li>
+      <li>Заполняй белые поля. Серые цифры, итоги и рубли считаются сами.</li>
+    </ul>
+  </section>
+
+  <section class="pad">
+    <div class="h2"><span>Как заполнено</span><small>строки из шаблона</small></div>
+    <div class="rows">
+      <div class="row">
+        <p class="cap">Вкладка «Моя поездка»</p>
+        <dl>
+          <dt>Дата</dt><dd>11 июня, 14:45</dd>
+          <dt>Место</dt><dd>Галатская башня</dd>
+          <dt>Как добраться</dt><dd>3 мин пешком от отеля</dd>
+          <dt>Детали</dt><dd>Около часа, панорама города, билеты онлайн</dd>
+          <dt>Стоимость</dt><dd>30</dd>
+          <dt>Статус</dt><dd><span class="st">Купить билет</span></dd>
+        </dl>
+      </div>
+      <div class="row">
+        <p class="cap">Вкладка «Фотоспоты»</p>
+        <dl>
+          <dt>Место</dt><dd>Галатская башня</dd>
+          <dt>Район</dt><dd>Галата</dd>
+          <dt>Лучшее время</dt><dd>Утро, до 9:00</dd>
+          <dt>Идея кадра</dt><dd>Башня в конце узкой улочки, ты в кадре со спины</dd>
+        </dl>
+      </div>
+      <div class="chk">
+        <div class="head"><span>Вкладка «Чек-лист»</span><em>собрано 0 из 27</em></div>
+        <h4>Документы</h4>
+        <ul><li>Загранпаспорт, проверить срок действия</li><li>Страховка: PDF в телефоне</li><li>Брони и билеты: скачать офлайн</li></ul>
+        <h4>Связь</h4>
+        <ul><li>Купить eSIM заранее и проверить, что телефон её поддерживает</li><li>Скачать офлайн-карты города</li></ul>
+        <p class="more">И ещё разделы «Деньги», «Техника», «Одежда» и «Аптечка».</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad">
+    <div class="gift">
+      <span class="sticker">Подарок</span>
+      <h3>В подарок две мои реальные поездки</h3>
+      <p>Планеры, в которых я сама спланировала эти поездки. Можно посмотреть, как всё заполнено по-настоящему.</p>
+      <div class="gifts">
+        <div class="ticket"><span class="n">1</span><div><b>Планер · Стамбул</b><span>Настоящая поездка, всё заполнено</span></div></div>
+        <div class="ticket"><span class="n">2</span><div><b>Планер · Кольский</b><span>Настоящая поездка, всё заполнено</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad">
+    <div class="h2"><span>Как получить</span></div>
+    <ul class="how">
+      <li>Оплата через Tribute, доступ приходит автоматически сразу после оплаты.</li>
+      <li>Ты получаешь шаблон и два моих реальных планера в подарок, делаешь свою копию и заполняешь.</li>
+      <li>Можно написать мне и задать вопрос по планеру.</li>
+    </ul>
+  </section>
+
+  <section class="pad">
+    <div class="h2"><span>Вопросы</span></div>
+    <details><summary>Нужен ли аккаунт Google?</summary><p>Да, бесплатный. Копия шаблона создаётся в твоём Google Диске и дальше работает как обычная таблица.</p></details>
+    <details><summary>Работает ли с телефона?</summary><p>Да, таблица открывается в приложении Google Таблицы на телефоне и в браузере на компьютере.</p></details>
+    <details><summary>Можно ли вести несколько поездок?</summary><p>Одна поездка — один файл. Для каждой новой поездки делаешь новую копию шаблона.</p></details>
+    <details><summary>А если поездка не в евро?</summary><p>Валюту поездки и курс указываешь в начале вкладки «Бюджет». Каждую статью можно вести в рублях или в валюте, итог всегда в рублях.</p></details>
+    <details><summary>Что будет после оплаты?</summary><p>Tribute сразу откроет доступ, и ты получишь шаблон и два моих реальных планера в подарок.</p></details>
+  </section>
+  <div class="torn"></div>
+
+  <section class="final pad">
+    <span class="price">990 ₽</span>
+    <p>Маршрут, бюджет, брони и чек-лист в одном файле, который открывается с телефона.</p>
+    <a class="btn cream" href="https://web.tribute.tg/s/19SW">Получить планер</a>
+    <p class="foot">© Яна Глебова · <a href="https://www.instagram.com/iamyanaglebova">@iamyanaglebova</a></p>
+    <p class="legal">Instagram принадлежит компании Meta Platforms Inc., признанной экстремистской организацией и запрещённой на территории Российской Федерации.</p>
+  </section>
+</div>
+</body>
+</html>
